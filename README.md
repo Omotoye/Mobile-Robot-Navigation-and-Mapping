@@ -8,8 +8,8 @@ For more information about the project requirements, [Click Here](Docs/SofAR-Ass
 ## Project Members
 | Name | Email Address |
 |:---:|:---:|
-|Omotoye Shamsudeen Adekoya| adekoyaomotoye@gmail.com|
-|Farzin Sarvari| |
-|Amanzhol Raisov| |
+|Omotoye Shamsudeen Adekoya|adekoyaomotoye@gmail.com|
+|Farzin Sarvari|Sarvarifarzin94@gmail.com|
+|Amanzhol Raisov|cornytravel@gmail.com|
 |Taha Hussain Raja| |
 
