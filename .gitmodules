@@ -1,0 +1,3 @@
+[submodule "SofAR-Mobile-Robot-Navigation"]
+	path = SofAR-Mobile-Robot-Navigation
+	url = https://github.com/TheEngineRoom-UniGe/SofAR-Mobile-Robot-Navigation.git
