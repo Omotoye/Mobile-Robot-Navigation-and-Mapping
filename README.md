@@ -11,5 +11,5 @@ For more information about the project requirements, [Click Here](Docs/SofAR-Ass
 |Omotoye Shamsudeen Adekoya|adekoyaomotoye@gmail.com|
 |Farzin Sarvari|Sarvarifarzin94@gmail.com|
 |Amanzhol Raisov|cornytravel@gmail.com|
-|Taha Hussain Raja| |rajagenoa@gmail.com|
+|Taha Hussain Raja| rajagenoa@gmail.com|
 
