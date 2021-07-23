@@ -3,7 +3,5 @@
 	<rosparam file="$(find mobile_robot_navigation_project)/config/params.yaml" command="load" />
 	<node name="server_endpoint" pkg="mobile_robot_navigation_project" type="server_endpoint.py" args="--wait" output="screen" respawn="true" />
 	<node name="odometry_publisher" pkg="mobile_robot_navigation_project" type="odometry_publisher.py" args="--wait" output="screen" respawn="true" />
-	<node name="laser_transform" pkg="mobile_robot_navigation_project" type="laser_transform.py" args="--wait" output="screen" respawn="true" />
-
 	<arg name="scan_topic" default="laser_scan" />
 </launch>
