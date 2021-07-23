@@ -3,6 +3,7 @@ import rospy
 
 # Because of transformations
 import tf_conversions
+import tf 
 
 import tf2_ros
 import geometry_msgs.msg
@@ -13,6 +14,15 @@ def publish_odom_frame(msg):
     br = tf2_ros.TransformBroadcaster()
     t = geometry_msgs.msg.TransformStamped()
 
+    quaternions = [msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w]
+
+    rpy = tf.transformations.euler_from_quaternion(quaternions)
+    roll = rpy[0]
+    pitch = rpy[1]
+    yaw= rpy[2]
+
+    quaternion = tf.transformations.quaternion_from_euler((roll+3.14159), pitch, (yaw))
+
     t.header.stamp = rospy.Time.now()
     t.header.frame_id = "odom"
     t.child_frame_id = "base_link"
@@ -20,10 +30,10 @@ def publish_odom_frame(msg):
     t.transform.translation.y = msg.position.y
     t.transform.translation.z = msg.position.z
     
-    t.transform.rotation.x = msg.orientation.x
-    t.transform.rotation.y = msg.orientation.y
-    t.transform.rotation.z = msg.orientation.z
-    t.transform.rotation.w = msg.orientation.w
+    t.transform.rotation.x = quaternion[0]
+    t.transform.rotation.y = quaternion[1]
+    t.transform.rotation.z = quaternion[2]
+    t.transform.rotation.w = quaternion[3]
 
     br.sendTransform(t)
 
