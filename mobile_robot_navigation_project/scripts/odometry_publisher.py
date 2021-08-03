@@ -21,7 +21,7 @@ def publish_odom_frame(msg):
     pitch = rpy[1]
     yaw= rpy[2]
 
-    quaternion = tf.transformations.quaternion_from_euler((roll+3.14159), pitch, (yaw))
+    quaternion = tf.transformations.quaternion_from_euler((roll), pitch, (yaw))
 
     t.header.stamp = rospy.Time.now()
     t.header.frame_id = "odom"
