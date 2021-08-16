@@ -10,6 +10,6 @@ z_resolution: 0.2
 z_voxels: 2
 publish_voxel_map: false
 
-observation_sources: laser_scan
+observation_sources: scan
 
-scan: {data_type: LaserScan, topic: laser_scan, marking: true, clearing: true, min_obstacle_height: 0.05, max_obstacle_height: 0.6}
+scan: {data_type: LaserScan, topic: /laser_scan, marking: true, clearing: true, min_obstacle_height: 0.05, max_obstacle_height: 0.6}
