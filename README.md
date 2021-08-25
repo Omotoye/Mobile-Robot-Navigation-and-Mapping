@@ -92,3 +92,36 @@ navigation (Macenski, Martín, et al., 2020). It has been shown to map spaces as
 This package subscribe to `sensor_msgs/LaserScan` in the `/laser_scan` topic and tf message in the`/tf` and the uses the message to generate a `nav_msgs/OccupancyGrid` and publishes it to the `/map` topic message. It also helps the robot Localize itself with the environment.
 
 #### RViz (Data Visualization)
+
+```mermaid
+    stateDiagram
+        [*] --> First
+        stateFirst {
+            [*] --> second
+            second --> [*]
+            }
+```
+
+```mermaid
+classDiagram
+      Animal <|-- Duck
+      Animal <|-- Fish
+      Animal <|-- Zebra
+      Animal : +int age
+      Animal : +String gender
+      Animal: +isMammal()
+      Animal: +mate()
+      class Duck{
+          +String beakColor
+          +swim()
+          +quack()
+      }
+      class Fish{
+          -int sizeInFeet
+          -canEat()
+      }
+      class Zebra{
+          +bool is_wild
+          +run()
+      }
+```
