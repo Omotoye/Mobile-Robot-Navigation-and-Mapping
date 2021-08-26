@@ -93,35 +93,10 @@ This package subscribe to `sensor_msgs/LaserScan` in the `/laser_scan` topic and
 
 #### RViz (Data Visualization)
 
-```mermaid
-    stateDiagram
-        [*] --> First
-        stateFirst {
-            [*] --> second
-            second --> [*]
-            }
-```
+This is a ROS inbuilt GUI tool for visualizing all the types of ROS messages published through ROS. The component is used to view the `nav_msgs/OccupancyGrid`message publised through the `/map` topic, the robot model, the odometry of the robot and much more. It is used to viualize all the ros messages publish within the Architecture. [ROS Wiki](http://wiki.ros.org/rviz)
 
-```mermaid
-classDiagram
-      Animal <|-- Duck
-      Animal <|-- Fish
-      Animal <|-- Zebra
-      Animal : +int age
-      Animal : +String gender
-      Animal: +isMammal()
-      Animal: +mate()
-      class Duck{
-          +String beakColor
-          +swim()
-          +quack()
-      }
-      class Fish{
-          -int sizeInFeet
-          -canEat()
-      }
-      class Zebra{
-          +bool is_wild
-          +run()
-      }
-```
+#### MoveBase (Dijkstra's Navigation)
+
+The move_base package provides an implementation of an action (see the actionlib package) that, given a goal in the world, will attempt to reach it with a mobile base. The move_base node links together a global and local planner to accomplish its global navigation task. It supports any global planner adhering to the nav_core::BaseGlobalPlanner interface specified in the nav_core package and any local planner adhering to the nav_core::BaseLocalPlanner interface specified in the nav_core package. The move_base node also maintains two costmaps, one for the global planner, and one for a local planner (see the costmap_2d package) that are used to accomplish navigation tasks.
+
+> For each of the external packages, the parameters of the package have been tuned specifically for use on this robot and various launch files have been created to easily launch the required parts of the packages.
