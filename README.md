@@ -52,7 +52,7 @@ The architecture is split into two main components; the **Unity Scene** componen
 
 #### Unity Scene Component
 
-The unity scene component is a simulation environment that is very similar to _Gazebo_ only that this Simulator is more general than Gazebo. Asides from simulating an environment for ROS development (which only just got supported recently), it is used for things like multiplatform game development, VR and AR application development, etc. In this component, there are two subcomponents, the _mobile robot, and the goal planner_. The unity scene publishes the **Robot Pose** (`/odometry_frame`) and **Laser Sensor Reading** (`/laser_scan`) from the Robot Model in the scene. The component implements a Publisher interface to send a ROS message **LaserScan** through the `/laser_scan` topic and a **Pose** message through the `/odometry_frame` topic. The Goal planner of the unity scene uses a slightly different interface; it uses an **_actionlib client_**. The two Interfaces only differ in concept because it also publishes the message just like a publisher, only that for the actionlib client, it follows the client-server concept, in which the client sends a request to a server and expects a response from the server. The goal planner sends a **geometry_msgs/PoseStamped** through the `move_base_simple/goal` topic. The only input message to the Unity Scene is a **geometry_msgs/Twist** message through the `/cmd_vel` topic. This message is sent from the ROS component to control the velocity of the Mobile Robot for the navigation of the robot. The Unity Scene Simulation environment was developed by [TheEngineRoom-Unige Lab](https://github.com/TheEngineRoom-UniGe/SofAR-Mobile-Robot-Navigation.git) for this project, the task for us is to create a ROS architecture to interact with the simulation environment to perform a specific task. So basically there's nothing to change from the Simulation other than interacting with it.
+The unity scene component is a simulation environment that is very similar to _Gazebo_ only that this Simulator is more general than Gazebo. Asides from simulating an environment for ROS development (which only just got supported recently), it is used for things like multiplatform game development, VR and AR application development, etc. In this component, there are two subcomponents, the _mobile robot, and the goal planner_. The unity scene publishes the **Robot Pose** (`/odometry_frame`) and **Laser Sensor Reading** (`/laser_scan`) from the Robot Model in the scene. The component implements a Publisher interface to send a ROS message `sensor_msgs/LaserScan` through the `/laser_scan` topic and a `geometry_msgs/Pose` message through the `/odometry_frame` topic. The Goal planner of the unity scene uses a slightly different interface; it uses an **_actionlib client_**. The two Interfaces only differ in concept because it also publishes the message just like a publisher, only that for the actionlib client, it follows the client-server concept, in which the client sends a request to a server and expects a response from the server. The goal planner sends a `geometry_msgs/PoseStamped` through the `move_base_simple/goal` topic. The only input message to the Unity Scene is a `geometry_msgs/Twist` message through the `/cmd_vel` topic. This message is sent from the ROS component to control the velocity of the Mobile Robot for the navigation of the robot. The Unity Scene Simulation environment was developed by [TheEngineRoom-Unige Lab](https://github.com/TheEngineRoom-UniGe/SofAR-Mobile-Robot-Navigation.git) for this project, the task for us is to create a ROS architecture to interact with the simulation environment to perform a specific task. So basically there's nothing to change from the Simulation other than interacting with it.
 
 #### The ROS Component (Robot Operating System)
 
@@ -99,7 +99,7 @@ This is a ROS inbuilt GUI tool for visualizing all the types of ROS messages pub
 
 #### MoveBase (Dijkstra's Navigation)
 
-The move_base package provides an implementation of an action (see the [actionlib](https://wiki.ros.org/actionlib) package) that, given a goal in the world, will attempt to reach it with a mobile base. The move_base node links together a global and local planner to accomplish its global navigation task. It supports any global planner adhering to the `nav_core::BaseGlobalPlanner` interface specified in the nav_core package and any local planner adhering to the `nav_core::BaseLocalPlanner` interface specified in the nav_core package. The move_base node also maintains two costmaps, one for the global planner, and one for a local planner (see the [costmap_2d](https://wiki.ros.org/costmap_2d) package) that are used to accomplish navigation tasks. [ROS Wiki](http://wiki.ros.org/move_base). The package is the package that is used to accomplish the navigation task, a goal of a target pose is published from the Unity Component and the move_base server sends the required `Twist` message to the `cmd_vel` topic to move the robot.
+The move_base package provides an implementation of an action (see the [actionlib](https://wiki.ros.org/actionlib) package) that, given a goal in the world, will attempt to reach it with a mobile base. The move_base node links together a global and local planner to accomplish its global navigation task. It supports any global planner adhering to the `nav_core::BaseGlobalPlanner` interface specified in the nav_core package and any local planner adhering to the `nav_core::BaseLocalPlanner` interface specified in the nav_core package. The move_base node also maintains two costmaps, one for the global planner, and one for a local planner (see the [costmap_2d](https://wiki.ros.org/costmap_2d) package) that are used to accomplish navigation tasks. [ROS Wiki](http://wiki.ros.org/move_base). The package is the package that is used to accomplish the navigation task, a goal of a target pose is published from the Unity Component and the move_base server sends the required `geometry_msgs/Twist` message to the `cmd_vel` topic to move the robot.
 
 > For each of the external packages, the parameters of the package have been tuned specifically for use on this robot and various launch files have been created to easily launch the required parts of the packages.
 
@@ -207,6 +207,8 @@ for launching the ROS part, several launch files have been created to launch all
      To start communication with Unity run the launch file below.
 
 ```bash
+source /opt/ros/noetic/setup.bash
+source ~/sofar_ws/devel/setup.bash
 roslaunch mobile_robot_navigation_project navigation.launch
 ```
 
@@ -224,6 +226,8 @@ _(ensure the server communication is up and running, you should see the followin
    - The run the launch file enter the command below
 
 ```bash
+source /opt/ros/noetic/setup.bash
+source ~/sofar_ws/devel/setup.bash
 roslaunch mobile_robot_navigation_project mapless_nav.launch
 ```
 
@@ -235,6 +239,8 @@ roslaunch mobile_robot_navigation_project mapless_nav.launch
    - the map generated from this process can be saved by using the command below, this map would be used for the mapbased_navigation architecture.
 
 ```bash
+source /opt/ros/noetic/setup.bash
+source ~/sofar_ws/devel/setup.bash
 rosrun map_server map_saver -f map
 ```
 
@@ -249,6 +255,8 @@ For this architecture, the step 1 and 2 of the Reactive Navigation remains the s
    - To run the launch file, enter the command below.
 
 ```bash
+source /opt/ros/noetic/setup.bash
+source ~/sofar_ws/devel/setup.bash
 roslaunch mobile_robot_navigation_project mapbased_nav.launch
 ```
 
