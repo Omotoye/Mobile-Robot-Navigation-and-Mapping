@@ -44,7 +44,7 @@ Three different system architecture was implemented for this project each with t
 
 <div align="center">
 <h3> Reactive Navigation (SLAM) </h3>
-<img src="" width="50%" height="50%" title="Reactive Navigation (SLAM) Software Architecture UML Component Diagram" alt="Reactive Navigation (SLAM) Software Architecture UML Component Diagram" >
+<img src="images/reactive_nav.png" width="100%" height="100%" title="Reactive Navigation (SLAM) Software Architecture UML Component Diagram" alt="Reactive Navigation (SLAM) Software Architecture UML Component Diagram" >
 </div>
 
 The architecture implements SLAM (Simultaneous Localization and Mapping) to navigate the robot from its initial pose to the target location. The SLAM package creates a map while moving through the unknown environment and then from the map created by the SLAM package, the robot can localize itself and use Dijkstra's algorithm to figure out the best path to take to the goal point base on the knowledge gathered from the map creation.
@@ -105,7 +105,7 @@ The move_base package provides an implementation of an action (see the [actionli
 
 <div align="center">
 <h3> MapBased Navigation </h3>
-<img src="" width="50%" height="50%" title="MapBased Navigation Software Architecture UML Component Diagram" alt="MapBased Navigation Software Architecture UML Component Diagram" >
+<img src="images/mapbased_nav.png" width="100%" height="100%" title="MapBased Navigation Software Architecture UML Component Diagram" alt="MapBased Navigation Software Architecture UML Component Diagram" >
 </div>
 
 This architecture uses the already created map from the SLAM architecture to navigate the known environment. For this architecture, the SLAM package is no longer required because the map is already known and another package can be used to Localize the robot on the map with [Monte Carlo Localization](https://en.wikipedia.org/wiki/Monte_Carlo_localization). The Unity Component remains the same as that of SLAM navigation. A detailed description of the two added components is attached below.
