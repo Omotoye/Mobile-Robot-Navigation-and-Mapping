@@ -246,6 +246,12 @@ rosrun map_server map_saver -f map
 
 From here, enjoy navigating with the architecture, a new goal position can be set from rviz as well by clicking on the 2D Nav Goal button.
 
+The image below is what the data visualization from the Rviz looks like for the reactive navigation. Notice how the robot has a path that goes directly to the goal pose, this is because the map the SLAM has generated does not yet have any information about the obstacles present in the areas it has not yet explored. The path to the goal point would be recalculated everytime a new information is provided by the SLAM. To watch a demo video, [click here](https://drive.google.com/drive/folders/1J7Ls3ue-l0A1jG1eqbRX7KWMd63fEp1p?usp=sharing)
+
+<div align="center">
+<img src="images/reactive_nav2.png" width="70%" height="70%" title="MapBased Navigation Software Architecture UML Component Diagram" alt="MapBased Navigation Software Architecture UML Component Diagram" >
+</div>
+
 #### For MapBased Navigation
 
 For this architecture, the step 1 and 2 of the Reactive Navigation remains the same.
@@ -266,6 +272,17 @@ Some more work is required for this architecture because initially, the robot ha
 
 From here the step 4 from the reactive navigation can be repeated to navigate the robot to some goal point.
 
-## Result
+The images below is what the data visualization from the Rviz looks like for the Mapbased Navigation
+The path planning here is a lot different from that of SLAM and easier as well. This is because the map of the environment is already known, so the AMCL helps the robot localize itself with respect to the map, making the path to the goal the actual path the robot would take to the goal (the path might change slight for errors in odometry)
+To watch a demo video, [click here](https://drive.google.com/drive/folders/1J7Ls3ue-l0A1jG1eqbRX7KWMd63fEp1p?usp=sharing)
+
+<div align="center">
+<img src="images/mapless_nav2.png" width="70%" height="70%" title="MapBased Navigation Software Architecture UML Component Diagram" alt="MapBased Navigation Software Architecture UML Component Diagram" >
+</div>
 
 ## Recommendations
+
+Some recommendations on the how to select the right architecture
+
+- The Mapbased Navigation is better suited for an environment in which a mobile robot would perform repetitive task, like in a warehouse.
+- The reactive navigation is better suited for an unknown environment, like disaster zone (for rescue mission), military survellance.
