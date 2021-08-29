@@ -16,7 +16,7 @@
 | Omotoye Shamsudeen Adekoya |  5066348   | adekoyaomotoye@gmail.com  |
 |       Farzin Sarvari       |  5057724   | Sarvarifarzin94@gmail.com |
 |      Amanzhol Raisov       |  4889656   |   cornytravel@gmail.com   |
-|     Taha Hussain Raja      |  5046306   |    rajagenoa@gmail.com    |
+|     Taha Hussain Raja      |  5046306   |    rajatahaa@live.com     |
 
 <div align="center">
 <h1>  Mobile Robot Navigation and Mapping </h1>
