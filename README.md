@@ -7,6 +7,8 @@
 
 ## Group ID: Nav-06
 
+**Project GitHub Link**- <https://github.com/Omotoye/Mobile-Robot-Navigation-and-Mapping.git>
+
 ## Project Members
 
 |            Name            | Student ID |       Email Address       |
@@ -24,23 +26,24 @@
 
 ## Project Objectives
 
-This project aims to design and implement a **_software architecture_** for the control of a mobile robot _(Husky Robot)_ to Navigate and Map an environment _(simulated or real-life)_. The Mobile Robot in question is a robot called **Husky Robot**, the robot is a _non-holonomic robot_ equipped with a LaserScan sensor for detecting an obstacle. A simulation environment is provided as a **Unity Scene** which is contained by the _husky robot_ and an environment with obstacles to navigate through, there is also a goal point that the robot is intended to navigate to. The control of the mobile robot to perform the aforementioned task is going to be done through ROS packages, therefore the ROS packages and how they interact through interfaces to perform the goal is what this project is going to focus on (basically investing the software architecture design for the ROS packages).
+This project aims to design and implement a **_software architecture_** for the control of a mobile robot _(Husky Robot)_ to Navigate and Map an environment _(simulated or real-life)_. The Mobile Robot in question is a robot called **Husky Robot**, the robot is a _non-holonomic robot_ equipped with a LaserScan sensor for detecting an obstacle. A simulation environment is provided as a **Unity Scene** which is contained by the _husky robot_ and an environment with obstacles to navigate through, there is also a goal point that the robot is intended to navigate to. The control of the mobile robot to perform the aforementioned task is going to be done through ROS packages, therefore the ROS packages and how they interact through interfaces to perform the goal is what this project is going to focus on (basically investigating the software architecture design for the ROS packages).
 
 Enumerated goals the software architecture is intended to achieve with the robot (simulated and real-life)
 
 - Create a 3D Map (SLAM)
 - Implement an Exploration Logic to reach a target in the environment.
 
-For more information about the project requirements, [Click Here](Docs/SofAR-Assignments-2020-2021.pdf).
+For more information about the project requirements, [Click Here](https://github.com/Omotoye/Mobile-Robot-Navigation-and-Mapping/blob/master/Docs/SofAR-Assignments-2020-2021.pdf).
 
 **NOTE**: **_some objectives have been changed because of simulation limitations_**
 
 ## System Architectures
 
-Three different system architecture was implemented for this project each with their different pros and cons.
+Three different system architecture was implemented for this project each with their different pros and cons, however, only two will be discussed because of the very bad performance of the third one.
 
 1. Reactive Navigation (SLAM), _Dijkstra's algorithm for Navigation_
 1. MapBased Navigation, _Dijkstra's algorithm for Navigation_
+1. Bug0 algorithm Navigation (**_not discussed, because it had a bad performance for the proposed environment_**)
 
 <div align="center">
 <h3> Reactive Navigation (SLAM) </h3>
@@ -124,7 +127,7 @@ amcl is a probabilistic localization system for a robot moving in 2D. It impleme
 
 The project is intended to be done with two PCs, one Windows pc running Unity and an Ubuntu Pc running ROS, however, there are ways around these to make both of them run on one pc. Also, the two PCs must be connected to the same internet.
 
-- Ubuntu Virtual Machine: Install an ubuntu virtual machine and then on the virtual machine install ROS and follow the steps below to install all the ROS packages required. **Note**; for the network adapter the bridge network option has to be selected.
+- Ubuntu Virtual Machine: Install an ubuntu virtual machine and then on the virtual machine install ROS and follow the steps below to install all the ROS packages required. **Note**; the bridge network option has to be selected for the network adapter.
 - Docker Container: To use a docker container to run the ubuntu side of the project, a tutorial provided by [Marco Gabriele Fedozzi](https://github.com/hypothe) can be followed by [clicking here](https://hub.docker.com/r/hypothe/sofar_ros) and then follow the instructions below for the installation of the ROS package
 - A final option is to use **wslg** (_Windows Subsystem for Linux GUI_). Follow the installation instruction by [clicking here](https://github.com/microsoft/wslg) and then follow the instructions below for the installation of the ROS package. _keep in mind that Windows 11 is required to run wslg_
 
@@ -246,10 +249,10 @@ rosrun map_server map_saver -f map
 
 From here, enjoy navigating with the architecture, a new goal position can be set from rviz as well by clicking on the 2D Nav Goal button.
 
-The image below is what the data visualization from the Rviz looks like for the reactive navigation. Notice how the robot has a path that goes directly to the goal pose, this is because the map the SLAM has generated does not yet have any information about the obstacles present in the areas it has not yet explored. The path to the goal point would be recalculated everytime a new information is provided by the SLAM. To watch a demo video, [click here](https://drive.google.com/drive/folders/1J7Ls3ue-l0A1jG1eqbRX7KWMd63fEp1p?usp=sharing)
+The image below is what the data visualization from the Rviz looks like for the reactive navigation. Notice how the robot has a path that goes directly to the goal pose, this is because the map the SLAM has generated does not yet have any information about the obstacles present in the areas it has not yet explored. The path to the goal point would be recalculated every time new information is provided by the SLAM. To watch a demo video, [click here](https://drive.google.com/drive/folders/1J7Ls3ue-l0A1jG1eqbRX7KWMd63fEp1p?usp=sharing)
 
 <div align="center">
-<img src="images/reactive_nav2.png" width="70%" height="70%" title="MapBased Navigation Software Architecture UML Component Diagram" alt="MapBased Navigation Software Architecture UML Component Diagram" >
+<img src="images/reactive_nav2.png" width="70%" height="70%" title="Reactive Navigation Test Image" alt="Reactive Navigation Test Image" >
 </div>
 
 #### For MapBased Navigation
@@ -268,21 +271,21 @@ roslaunch mobile_robot_navigation_project mapbased_nav.launch
 
 Some more work is required for this architecture because initially, the robot has no idea where it is located on the map, therefore we have to set the pose by using the 2D Pose Estimate button in rviz.
 
-> **how to know that the correct pose was selected**; the odom frame would be in the same point (or very close) where the map frame is located and then the obstacle detected by the laser scan would align with the actual obstacle in the map
+> **how to know that the correct pose was selected**; the odom frame would be at the same point (or very close) where the map frame is located and then the obstacle detected by the laser scan would align with the actual obstacle in the map
 
 From here the step 4 from the reactive navigation can be repeated to navigate the robot to some goal point.
 
-The images below is what the data visualization from the Rviz looks like for the Mapbased Navigation
-The path planning here is a lot different from that of SLAM and easier as well. This is because the map of the environment is already known, so the AMCL helps the robot localize itself with respect to the map, making the path to the goal the actual path the robot would take to the goal (the path might change slight for errors in odometry)
+The image below is what the data visualization from the Rviz looks like for the Map-based Navigation
+The path planning here is a lot different from that of SLAM and easier as well. This is because the map of the environment is already known, so the AMCL helps the robot localize itself with respect to the map, making the path to the goal the actual path the robot would take to the goal (the path might change slightly for errors in odometry)
 To watch a demo video, [click here](https://drive.google.com/drive/folders/1J7Ls3ue-l0A1jG1eqbRX7KWMd63fEp1p?usp=sharing)
 
 <div align="center">
-<img src="images/mapless_nav2.png" width="70%" height="70%" title="MapBased Navigation Software Architecture UML Component Diagram" alt="MapBased Navigation Software Architecture UML Component Diagram" >
+<img src="images/mapless_nav2.png" width="70%" height="70%" title="MapBased Navigation Test Image" alt="MapBased Navigation Test Image" >
 </div>
 
 ## Recommendations
 
-Some recommendations on the how to select the right architecture
+Some recommendations on how to select the right architecture
 
-- The Mapbased Navigation is better suited for an environment in which a mobile robot would perform repetitive task, like in a warehouse.
-- The reactive navigation is better suited for an unknown environment, like disaster zone (for rescue mission), military survellance.
+- The Mapbased Navigation is better suited for an environment in which a mobile robot would perform a repetitive task, like in a warehouse.
+- The reactive navigation is better suited for an unknown environment, like a disaster zone (for rescue missions), military surveillance.
