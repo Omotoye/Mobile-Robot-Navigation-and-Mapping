@@ -14,7 +14,7 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
     <!-- The launch file for launching the slam toolbox package with the required configuration-->
-    <include file="$(find mobile_robot_navigation_project)/launch/slam_toolbox.launch">
+    <include file="$(find mobile_robot_navigation_project)/launch/gmapping.launch">
     </include>
 
     <!--- Run Move Base -->
